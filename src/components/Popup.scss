@@ -1,0 +1,17 @@
+.popup-container {
+    top:0;
+    margin: 70px 0px 0px -50px;
+    position: fixed;
+    justify-content: center;
+    align-content: center;
+    height: 450px;
+    width: 300px;
+    background: rgb(230, 215, 182);
+    border-radius: 10px;
+}
+
+@media (min-width: 1300px) {
+    .popup-container {
+       margin: 250px 0px 0px -50px;
+    }
+}
