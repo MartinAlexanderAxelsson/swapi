@@ -85,7 +85,7 @@ export default function CharacterListPage() {
                 <button className="main-container__wrapper__prev-btn" disabled={page < 2} onClick={e => SetPage(page-1)}>Prev</button>
                 <button className="main-container__wrapper__next-btn" onClick={e => SetPage(page+1)}>Next</button>
             </div>
-            <a href="https://www.google.se"><img className="main-container__wrapper__gitlogo" src={GitLogo}></img></a>
+            <a href="https://github.com/MartinAlexanderAxelsson/swapi"><img className="main-container__wrapper__gitlogo" src={GitLogo}></img></a>
             </div>
 
         </div>
