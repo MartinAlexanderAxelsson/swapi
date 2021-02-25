@@ -1,19 +1,19 @@
 .character-detail {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top:50px;
- 
-    &__name{
-     font-weight: bold;
-    }
-    &__btn {
-        height:30px;
-        width: 60px;
-        margin-top:12px;
-        background: rgb(231, 228, 219);
-        border-radius: 4px;
-        border: 1.5px solid rgb(197, 194, 182);
-        outline: none;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+
+  &__name {
+    font-weight: bold;
+  }
+  &__btn {
+    height: 30px;
+    width: 60px;
+    margin-top: 12px;
+    background: rgb(231, 228, 219);
+    border-radius: 4px;
+    border: 1.5px solid rgb(197, 194, 182);
+    outline: none;
+  }
 }
