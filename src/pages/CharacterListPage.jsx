@@ -19,7 +19,11 @@ export default function CharacterListPage() {
       .then((res) => res.json())
       .then((data) => {
         setCharacterList(data.results)
-        if (data.next === null) SetDisableAtEnd(true)
+        if (data.next === null) {
+          SetDisableAtEnd(true)
+        } else {
+          SetDisableAtEnd(false)
+        }
       })
   }
 
@@ -36,7 +40,7 @@ export default function CharacterListPage() {
 
   function handleClearSearch() {
     searchInput.current.value = ""
-    setSearchTerm('')
+    setSearchTerm("")
     setCharacterList(getCharacterList)
   }
 
