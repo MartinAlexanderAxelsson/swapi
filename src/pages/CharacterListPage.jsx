@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, useReducer } from "react"
 import CharacterListItem from "../components/CharacterListItem"
 import "./CharacterListPage.scss"
 import Logo from "../images/SW_Logo.png"
@@ -6,15 +6,15 @@ import GitLogo from "../images/GitHub_Logo.png"
 import { AiOutlineSearch, AiFillCloseCircle } from "react-icons/ai"
 
 export default function CharacterListPage() {
-  const [characterList, setCharacterList] = useState(null)
-  const [page, SetPage] = useState(1)
+  const [characterList, setCharacterList] = useState([])
+  const [page, setPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState("")
   const searchInput = useRef("")
   const clearIcon = { visibility: "hidden" }
   const [disableAtEnd, SetDisableAtEnd] = useState(false)
 
   function getCharacterList() {
-    const url = `https://swapi.dev/api/people/?page=${page}`
+    const url = `https://swapi.dev/api/people/?search=${searchTerm}&page=${page}`
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -27,30 +27,24 @@ export default function CharacterListPage() {
       })
   }
 
-  function getSearchedCharacterList() {
-    const url = `https://swapi.dev/api/people/?search=${searchTerm}`
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setCharacterList(data.results))
-  }
-
   if (searchTerm) {
     clearIcon.visibility = "visible"
   }
 
+  function handleSearch() {
+    setSearchTerm(searchInput.current.value)
+    setPage(1)
+  }
+
   function handleClearSearch() {
-    searchInput.current.value = ""
     setSearchTerm("")
-    setCharacterList(getCharacterList)
+    searchInput.current.value = ""
+    setPage(1)
   }
 
   useEffect(() => {
-    if (searchTerm) {
-      getSearchedCharacterList()
-    } else {
-      getCharacterList()
-    }
-  }, [page])
+    getCharacterList()
+  }, [page, searchTerm])
 
   return (
     <div className="main-container">
@@ -58,16 +52,13 @@ export default function CharacterListPage() {
         <img className="main-container__wrapper__img" src={Logo}></img>
 
         <div className="main-container__search-wrapper">
-          <AiOutlineSearch
-            onClick={getSearchedCharacterList}
-            class="main-container__search-wrapper__icon"
-          />
+          <AiOutlineSearch class="main-container__search-wrapper__icon" />
           <input
             ref={searchInput}
             className="main-container__search-wrapper__input"
             placeholder="Search"
             type="text"
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearch}
           ></input>
           <AiFillCloseCircle
             style={clearIcon}
@@ -94,14 +85,14 @@ export default function CharacterListPage() {
           <button
             className="main-container__wrapper__prev-btn"
             disabled={page < 2}
-            onClick={(e) => SetPage(page - 1)}
+            onClick={(e) => setPage(page - 1)}
           >
             Prev
           </button>
           <button
             disabled={disableAtEnd}
             className="main-container__wrapper__next-btn"
-            onClick={(e) => SetPage(page + 1)}
+            onClick={(e) => setPage(page + 1)}
           >
             Next
           </button>
