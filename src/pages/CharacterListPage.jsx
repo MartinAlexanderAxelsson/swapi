@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useReducer } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import CharacterListItem from "../components/CharacterListItem"
 import "./CharacterListPage.scss"
 import Logo from "../images/SW_Logo.png"
@@ -6,7 +6,7 @@ import GitLogo from "../images/GitHub_Logo.png"
 import { AiOutlineSearch, AiFillCloseCircle } from "react-icons/ai"
 
 export default function CharacterListPage() {
-  const [characterList, setCharacterList] = useState([])
+  const [characterList, setCharacterList] = useState(null)
   const [page, setPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState("")
   const searchInput = useRef("")
